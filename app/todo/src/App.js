@@ -1,10 +1,14 @@
 import React from 'react';
 
-function App() {
-  return (
-    <div>
-    </div>
-  );
-}
+import TaskList from './TaskList/TaskList';
 
-export default App;
+export default class App extends React.Component {
+  state = { todos: [] }
+  render() {
+    return (
+      <div>
+        <TaskList todos={ this.state.todos } />
+      </div>
+    );
+  }
+}
