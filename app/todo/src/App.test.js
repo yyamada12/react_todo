@@ -11,6 +11,11 @@ describe("App", () => {
     const { getByTestId } = render(<App />);
     expect(getByTestId("todos")).toHaveTextContent("Nothing Todo");
   })
-  it.todo("フォームからタスクを追加できる")
+  it("フォームがある", () => {
+    const { getByTestId } = render(<App />);
+    expect(getByTestId("form")).toBeDefined();
+  })
+  it.todo("新規Todo作成ボタンがある")
+  it.todo("ボタンをクリックするとTodoが追加される")
   it.todo("タスクがある場合はリストで表示")
 })
