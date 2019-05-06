@@ -15,7 +15,10 @@ describe("App", () => {
     const { getByTestId } = render(<App />);
     expect(getByTestId("form")).toBeDefined();
   })
-  it.todo("新規Todo作成ボタンがある")
+  it("新規Todo作成ボタンがある", () => {
+    const { getByTestId } = render(<App />);
+    expect(getByTestId("addButton")).toBeDefined();
+  })
   it.todo("ボタンをクリックするとTodoが追加される")
   it.todo("タスクがある場合はリストで表示")
 })

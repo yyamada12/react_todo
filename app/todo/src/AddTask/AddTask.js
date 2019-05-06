@@ -8,6 +8,7 @@ export default class AddTask extends React.Component {
                 <form data-testid="form">
                     <input type="text"/>
                 </form>
+                <button data-testid="addButton">Add Task</button>
             </div>
         )
     }
