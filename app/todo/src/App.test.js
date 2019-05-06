@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup, getByTestId } from "react-testing-library";
+import { render, cleanup, fireEvent } from "react-testing-library";
 import "jest-dom/extend-expect";
 
 import App from "./App";
@@ -28,5 +28,14 @@ describe("App", () => {
     const { getByTestId } = render(<TaskList todos={todos}/>);
     expect(getByTestId("todos")).toHaveTextContent("Task 1");
   })
-  it.todo("ボタンをクリックするとTodoが追加される")
+  it("ボタンをクリックするとTodoが追加される", () => {
+    const {getByText, getByTestId} = render(<App />);
+    const input = getByTestId('form');
+    fireEvent.change(input, {target: {value: 'Added Task'}});
+    fireEvent.click(getByText('Add Task'));
+    expect(getByTestId('todos')).toHaveTextContent('Added Task')
+  })
+  it.todo("ボタンをクリックした時フォームをクリアする")
+  it.todo("入力が空の時はTodoを追加しない")
+  it.todo("削除ボタンを押すとTodoを削除できる")
 })
