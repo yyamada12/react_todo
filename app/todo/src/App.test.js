@@ -3,6 +3,7 @@ import { render, cleanup, getByTestId } from "react-testing-library";
 import "jest-dom/extend-expect";
 
 import App from "./App";
+import TaskList from "./TaskList/TaskList";
 
 afterEach(cleanup);
 
@@ -19,6 +20,13 @@ describe("App", () => {
     const { getByText } = render(<App />);
     expect(getByText("Add Task")).toBeDefined();
   })
+  it("タスクがある場合はリストで表示", () => {
+    const todos = [{
+      id: 1,
+      name: "Task 1"
+    }]
+    const { getByTestId } = render(<TaskList todos={todos}/>);
+    expect(getByTestId("todos")).toHaveTextContent("Task 1");
+  })
   it.todo("ボタンをクリックするとTodoが追加される")
-  it.todo("タスクがある場合はリストで表示")
 })
