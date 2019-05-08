@@ -8,25 +8,41 @@ export default class App extends React.Component {
     super();
 
     this.addTask = this.addTask.bind(this);
+    this.onChangeInput = this.onChangeInput.bind(this);
   }
 
-  state = { todos: [] };
+  state = { 
+    todos: [],
+    input: ""
+  };
 
-  addTask(input) {
+  addTask() {
     const todos = this.state.todos.slice();
     todos.push({
       id: getUniqueId(),
-      name: input
+      name: this.state.input
     });
     this.setState({
-      todos: todos
+      todos: todos,
+      input: ""
     });
   }
+
+  onChangeInput(e) {
+    this.setState({
+      input: e.target.value
+    });
+  }
+
   render() {
     return (
       <div>
         <TaskList todos={this.state.todos} />
-        <AddTask addTask={this.addTask} />
+        <AddTask 
+          addTask={this.addTask} 
+          onChangeInput={this.onChangeInput}
+          input={this.state.input}
+        />
       </div>
     );
   }
