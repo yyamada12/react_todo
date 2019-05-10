@@ -17,6 +17,7 @@ export default class App extends React.Component {
   };
 
   addTask() {
+    if(this.state.input.trim() == "") return;
     const todos = this.state.todos.slice();
     todos.push({
       id: getUniqueId(),

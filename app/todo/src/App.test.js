@@ -39,7 +39,11 @@ describe("App", () => {
       fireEvent.click(getByText('Add Task'));
       expect(getByTestId('form').value).toBe('')
     })
-    it.todo("入力が空の時はTodoを追加しない")
+    it("入力が空の時はTodoを追加しない", () => {
+      fireEvent.change(input, {target: {value: '   '}});
+      fireEvent.click(getByText('Add Task'));
+      expect(getByTestId('todos')).toHaveTextContent('Nothing Todo')
+    })
   })  
 
   describe("Todoの削除", () => {
