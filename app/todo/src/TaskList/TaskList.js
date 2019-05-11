@@ -1,24 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default class TaskList extends React.Component {
-  render() {
-    return (
-      <div data-testid="todos">
-        {this.props.todos.length === 0 ? (
-          "Nothing Todo"
-        ) : (
-          <ul>
-            {this.props.todos.map(todo => (
-              <li key={todo.id}>{todo.name}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-    );
-  }
-}
+const TaskList = props => (
+  <div data-testid="todos">
+    {props.todos.length === 0 ? (
+      "Nothing Todo"
+    ) : (
+      <ul>
+        {props.todos.map(todo => (
+          <li key={todo.id}>
+            {todo.name}
+            <button onClick={() => props.removeTask(todo.id)}>x</button>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+);
 
 TaskList.propTypes = {
-  todos: PropTypes.array
+  todos: PropTypes.array.isRequired,
+  removeTask: PropTypes.func
 };
+
+export default TaskList;

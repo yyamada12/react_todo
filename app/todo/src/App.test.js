@@ -47,7 +47,15 @@ describe("App", () => {
   })  
 
   describe("Todoの削除", () => {
-    it.todo("削除ボタンを押すとTodoを削除できる")
+    it("削除ボタンを押すとTodoを削除できる", () => {
+      const {getByText, getByTestId} = render(<App />);
+      const input = getByTestId('form');
+      fireEvent.change(input, {target: {value: 'Added Task'}});
+      fireEvent.click(getByText('Add Task'));
+      fireEvent.click(getByText('x'))
+      expect(getByTestId('todos')).toHaveTextContent('Nothing Todo')
+
+    })
   })
 
   describe("Todoのチェック", () => {

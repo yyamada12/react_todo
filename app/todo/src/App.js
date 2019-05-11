@@ -9,15 +9,16 @@ export default class App extends React.Component {
 
     this.addTask = this.addTask.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
+    this.removeTask = this.removeTask.bind(this);
   }
 
-  state = { 
+  state = {
     todos: [],
     input: ""
   };
 
   addTask() {
-    if(this.state.input.trim() == "") return;
+    if (this.state.input.trim() === "") return;
     const todos = this.state.todos.slice();
     todos.push({
       id: getUniqueId(),
@@ -35,12 +36,21 @@ export default class App extends React.Component {
     });
   }
 
+  removeTask(removeTaskId) {
+    const todos = this.state.todos.filter(todo => {
+      return todo.id !== removeTaskId;
+    });
+    this.setState({
+      todos: todos
+    });
+  }
+
   render() {
     return (
       <div>
-        <TaskList todos={this.state.todos} />
-        <AddTask 
-          addTask={this.addTask} 
+        <TaskList todos={this.state.todos} removeTask={this.removeTask} />
+        <AddTask
+          addTask={this.addTask}
           onChangeInput={this.onChangeInput}
           input={this.state.input}
         />
