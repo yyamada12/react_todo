@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AddTask = (props) => (
+const AddTask = props => (
   <div>
     <form>
       <input
@@ -11,11 +11,9 @@ const AddTask = (props) => (
         onChange={props.onChangeInput}
       />
     </form>
-    <button onClick={props.addTask}>
-      Add Task
-    </button>
+    <button onClick={props.addTask}>Add Task</button>
   </div>
-)
+);
 
 AddTask.propTypes = {
   input: PropTypes.string.isRequired,

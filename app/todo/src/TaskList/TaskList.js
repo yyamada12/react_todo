@@ -9,6 +9,12 @@ const TaskList = props => (
       <ul>
         {props.todos.map(todo => (
           <li key={todo.id}>
+            <input
+              type="checkbox"
+              data-testid="checkbox"
+              checked={todo.isDone}
+              onChange={() => props.checkTodo(todo.id)}
+            />
             {todo.name}
             <button onClick={() => props.removeTask(todo.id)}>x</button>
           </li>
@@ -20,7 +26,8 @@ const TaskList = props => (
 
 TaskList.propTypes = {
   todos: PropTypes.array.isRequired,
-  removeTask: PropTypes.func
+  removeTask: PropTypes.func,
+  checkTodo: PropTypes.func
 };
 
 export default TaskList;

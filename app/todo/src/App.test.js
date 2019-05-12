@@ -59,7 +59,18 @@ describe("App", () => {
   })
 
   describe("Todoのチェック", () => {
-    it.todo("チェックボックスのオンオフができる")
+    it("新しく追加したTodoのチェックはfalseで、クリックでON/OFFができる", () => {
+      const {getByText, getByTestId} = render(<App />);
+      const input = getByTestId('form');
+      fireEvent.change(input, {target: {value: 'Added Task'}});
+      fireEvent.click(getByText('Add Task'));
+
+      const checkbox = getByTestId('checkbox')
+
+      expect(checkbox.checked).toEqual(false)
+      fireEvent.click(checkbox)
+      expect(checkbox.checked).toEqual(true)
+    })
     it.todo("チェックされているTodoの数を表示する")
   })
 })

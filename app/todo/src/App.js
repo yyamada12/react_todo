@@ -10,6 +10,7 @@ export default class App extends React.Component {
     this.addTask = this.addTask.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
     this.removeTask = this.removeTask.bind(this);
+    this.checkTodo = this.checkTodo.bind(this);
   }
 
   state = {
@@ -22,7 +23,8 @@ export default class App extends React.Component {
     const todos = this.state.todos.slice();
     todos.push({
       id: getUniqueId(),
-      name: this.state.input
+      name: this.state.input,
+      isDone: false
     });
     this.setState({
       todos: todos,
@@ -45,10 +47,24 @@ export default class App extends React.Component {
     });
   }
 
+  checkTodo(checkTaskId) {
+    const todos = this.state.todos.slice();
+    todos.map(todo => {
+      if (todo.id === checkTaskId) todo.isDone = !todo.isDone;
+    });
+    this.setState({
+      todos: todos
+    });
+  }
+
   render() {
     return (
       <div>
-        <TaskList todos={this.state.todos} removeTask={this.removeTask} />
+        <TaskList
+          todos={this.state.todos}
+          removeTask={this.removeTask}
+          checkTodo={this.checkTodo}
+        />
         <AddTask
           addTask={this.addTask}
           onChangeInput={this.onChangeInput}
