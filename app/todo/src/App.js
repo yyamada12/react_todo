@@ -50,7 +50,7 @@ export default class App extends React.Component {
 
   checkTodo(checkTaskId) {
     const todos = this.state.todos.slice();
-    todos.map(todo => {
+    todos.forEach(todo => {
       if (todo.id === checkTaskId) todo.isDone = !todo.isDone;
     });
     this.setState({
