@@ -2,6 +2,7 @@ import React from "react";
 
 import TaskList from "./TaskList/TaskList";
 import AddTask from "./AddTask/AddTask";
+import Title from "./Title/Title";
 
 export default class App extends React.Component {
   constructor() {
@@ -60,6 +61,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <Title
+          num_of_remains={this.state.todos.filter(todo => !todo.isDone).length}
+          num_of_todos={this.state.todos.length}
+        />
         <TaskList
           todos={this.state.todos}
           removeTask={this.removeTask}

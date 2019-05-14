@@ -59,18 +59,31 @@ describe("App", () => {
   })
 
   describe("Todoのチェック", () => {
-    it("新しく追加したTodoのチェックはfalseで、クリックでON/OFFができる", () => {
-      const {getByText, getByTestId} = render(<App />);
-      const input = getByTestId('form');
-      fireEvent.change(input, {target: {value: 'Added Task'}});
-      fireEvent.click(getByText('Add Task'));
-
-      const checkbox = getByTestId('checkbox')
-
-      expect(checkbox.checked).toEqual(false)
-      fireEvent.click(checkbox)
-      expect(checkbox.checked).toEqual(true)
+    let getByTestId, getByText, input, addButton
+    beforeEach(() => {
+      ({getByText, getByTestId} = render(<App />));
+      input = getByTestId('form');
+      addButton = getByText('Add Task');
     })
-    it.todo("チェックされているTodoの数を表示する")
+    it("新しく追加したTodoのチェックはfalseで、クリックでON/OFFができる", () => {
+      fireEvent.change(input, {target: {value: 'Added Task'}});
+      fireEvent.click(addButton);
+      const checkbox = getByTestId('checkbox');
+      expect(checkbox.checked).toEqual(false);
+      fireEvent.click(checkbox);
+      expect(checkbox.checked).toEqual(true);
+    })
+    it("未チェックのTodoの数を表示する", () => {
+      fireEvent.change(input, {target: {value: 'Added Task1'}});
+      fireEvent.click(addButton);
+      const checkbox = getByTestId('checkbox');
+      fireEvent.click(checkbox);
+      fireEvent.change(input, {target: {value: 'Added Task2'}});
+      fireEvent.click(addButton);
+      fireEvent.change(input, {target: {value: 'Added Task3'}});
+      fireEvent.click(addButton);
+
+      expect(getByTestId('counts')).toHaveTextContent('(2/3)')
+    })
   })
 })
