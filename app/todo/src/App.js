@@ -34,6 +34,16 @@ class App extends React.Component {
     input: ""
   };
 
+  componentDidMount() {
+    this.setState({
+      todos: JSON.parse(localStorage.getItem("todos")) || []
+    });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
+  }
+
   addTask() {
     if (this.state.input.trim() === "") return;
     const todos = this.state.todos.slice();
